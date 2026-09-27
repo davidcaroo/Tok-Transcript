@@ -4,7 +4,6 @@ from __future__ import annotations
 
 import logging
 from pathlib import Path
-import tempfile
 from typing import Any, Callable, Dict, Optional
 import uuid
 
@@ -82,9 +81,16 @@ class TikTokDownloader:
             "no_warnings": True,
             "progress_hooks": [_progress_hook],
             "noplaylist": True,
-            "socket_timeout": 15,
+            "socket_timeout": 20,
             "retries": 3,
         }
+
+        # Impersonate modern browser TLS fingerprint (solves TikTok webpage request block)
+        try:
+            from yt_dlp.networking.impersonate import ImpersonateTarget
+            ydl_opts["impersonate"] = ImpersonateTarget.from_str("chrome")
+        except Exception as e:
+            logger.debug("curl_cffi impersonate target not configured: %s", e)
 
         ffmpeg_bin = resolve_ffmpeg_path()
         if ffmpeg_bin:
@@ -103,11 +109,9 @@ class TikTokDownloader:
                 if "requested_downloads" in info and info["requested_downloads"]:
                     downloaded_path = Path(info["requested_downloads"][0]["filepath"])
                 else:
-                    # Fallback to prepare_filename
                     downloaded_path = Path(ydl.prepare_filename(info))
 
                 if not downloaded_path.exists():
-                    # Check any files matching pattern in temp dir
                     candidates = list(self.temp_dir.glob(f"tt_{unique_id}_*"))
                     if candidates:
                         downloaded_path = candidates[0]
@@ -127,6 +131,10 @@ class TikTokDownloader:
             logger.error("yt-dlp DownloadError: %s", err)
             if "private" in err_msg or "login" in err_msg:
                 raise PrivateVideoError(str(err)) from err
+            elif "unexpected response" in err_msg:
+                raise VideoUnavailableError(
+                    f"TikTok bloqueó la solicitud temporalmente o el enlace requiere verificación ({err})"
+                ) from err
             elif "unavailable" in err_msg or "not found" in err_msg or "404" in err_msg:
                 raise VideoUnavailableError(str(err)) from err
             elif "connection" in err_msg or "timed out" in err_msg or "network" in err_msg:

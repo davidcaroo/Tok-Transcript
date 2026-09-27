@@ -39,9 +39,10 @@ def main() -> None:
     app.setApplicationName(APP_NAME)
     app.setApplicationDisplayName(APP_NAME)
 
-    stylesheet = load_stylesheet()
-    if stylesheet:
-        app.setStyleSheet(stylesheet)
+    # Apply saved theme (System / Dark / Light)
+    from utils.theme_manager import ThemeManager
+    saved_mode = ThemeManager.get_saved_mode()
+    ThemeManager.apply_theme(saved_mode, app)
 
     window = MainWindow()
     window.show()

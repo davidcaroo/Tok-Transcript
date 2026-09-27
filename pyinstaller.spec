@@ -18,6 +18,7 @@ datas = [
 datas += collect_data_files('faster_whisper')
 datas += collect_data_files('ctranslate2')
 datas += collect_data_files('imageio_ffmpeg')
+datas += collect_data_files('curl_cffi')
 
 hiddenimports = [
     'PySide6.QtCore',
@@ -26,6 +27,9 @@ hiddenimports = [
     'faster_whisper',
     'ctranslate2',
     'imageio_ffmpeg',
+    'curl_cffi',
+    'darkdetect',
+    'cffi',
     'yt_dlp',
     'av',
 ]

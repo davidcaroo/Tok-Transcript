@@ -10,7 +10,11 @@ La interfaz gráfica sigue una estética moderna y minimalista inspirada en herr
 
 ## 📸 Capturas de la Aplicación
 
-![Tok-Transcript Preview](assets/screenshots/app_transcription_result.png)
+### Modo Oscuro (Linear / Raycast Theme)
+![Tok-Transcript Modo Oscuro](assets/screenshots/app_dark_mode.png)
+
+### Modo Claro (Notion Theme)
+![Tok-Transcript Modo Claro](assets/screenshots/app_light_mode.png)
 
 ---
 

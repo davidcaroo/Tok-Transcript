@@ -19,6 +19,7 @@ from PySide6.QtWidgets import (
 from app.dialogs.error_dialog import ErrorDialog
 from app.widgets.progress_panel import ProgressPanel
 from app.widgets.settings_panel import SettingsPanel
+from app.widgets.theme_switcher import ThemeSwitcherWidget
 from app.widgets.transcript_view import TranscriptView
 from app.widgets.url_input import UrlInputWidget
 from models.transcript import TranscriptResult
@@ -76,6 +77,10 @@ class MainWindow(QMainWindow):
 
         header_layout.addLayout(title_box)
         header_layout.addStretch()
+
+        # Theme Switcher (Light / Dark / System)
+        self.theme_switcher = ThemeSwitcherWidget(header_frame)
+        header_layout.addWidget(self.theme_switcher, alignment=Qt.AlignVCenter)
 
         root_layout.addWidget(header_frame)
 
