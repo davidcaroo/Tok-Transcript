@@ -5,6 +5,7 @@ from __future__ import annotations
 import logging
 from pathlib import Path
 import subprocess
+import sys
 from typing import Optional
 import uuid
 
@@ -74,6 +75,10 @@ class AudioProcessor:
 
         logger.info("Executing audio conversion with FFmpeg: %s -> %s", input_media_path.name, output_filename)
 
+        creationflags = 0
+        if sys.platform == "win32":
+            creationflags = subprocess.CREATE_NO_WINDOW
+
         try:
             result = subprocess.run(
                 command,
@@ -82,6 +87,7 @@ class AudioProcessor:
                 text=True,
                 check=False,
                 shell=False,
+                creationflags=creationflags,
                 timeout=120,  # Max 2 minutes for audio normalization
             )
 

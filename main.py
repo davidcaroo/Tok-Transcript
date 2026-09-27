@@ -35,9 +35,26 @@ def main() -> None:
         Qt.HighDpiScaleFactorRoundingPolicy.PassThrough
     )
 
+    # Set Windows AppUserModelID so Windows taskbar uses the app icon
+    if sys.platform == "win32":
+        try:
+            import ctypes
+            app_id = "davidcaro.toktranscript.desktop.1.0"
+            ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID(app_id)
+        except Exception as err:
+            logger.debug("Could not set AppUserModelID: %s", err)
+
     app = QApplication(sys.argv)
     app.setApplicationName(APP_NAME)
     app.setApplicationDisplayName(APP_NAME)
+
+    # Set application icon globally on QApplication (for Taskbar, Alt+Tab, and Dialogs)
+    from PySide6.QtGui import QIcon
+    icon_path = get_assets_path() / "icons" / "app_icon.ico"
+    if not icon_path.exists():
+        icon_path = get_assets_path() / "icons" / "app_icon.png"
+    if icon_path.exists():
+        app.setWindowIcon(QIcon(str(icon_path)))
 
     # Apply saved theme (System / Dark / Light)
     from utils.theme_manager import ThemeManager

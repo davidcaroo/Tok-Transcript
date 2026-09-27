@@ -44,7 +44,7 @@ class WhisperTranscriber:
 
         logger.info("Loading Whisper model: %s (device=%s, compute_type=%s)", model_size, self.device, self.compute_type)
         if status_callback:
-            status_callback("Preparando el motor de transcripción por primera vez...")
+            status_callback("Descargando motor de IA por primera vez (~460 MB, solo una vez)...")
 
         try:
             model = WhisperModel(

@@ -45,7 +45,9 @@ class MainWindow(QMainWindow):
         self._setup_app_icon()
 
     def _setup_app_icon(self) -> None:
-        icon_path = get_assets_path() / "icons" / "app_icon.png"
+        icon_path = get_assets_path() / "icons" / "app_icon.ico"
+        if not icon_path.exists():
+            icon_path = get_assets_path() / "icons" / "app_icon.png"
         if icon_path.exists():
             self.setWindowIcon(QIcon(str(icon_path)))
 
