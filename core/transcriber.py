@@ -46,6 +46,15 @@ class WhisperTranscriber:
         if status_callback:
             status_callback("Descargando motor de IA por primera vez (~460 MB, solo una vez)...")
 
+        # Clean stale lock files from previous aborted sessions to prevent indefinite hangs
+        try:
+            locks_dir = Path.home() / ".cache" / "huggingface" / "hub" / ".locks"
+            if locks_dir.exists():
+                import shutil
+                shutil.rmtree(locks_dir, ignore_errors=True)
+        except Exception as lock_err:
+            logger.debug("Non-critical error clearing HF locks: %s", lock_err)
+
         try:
             model = WhisperModel(
                 model_size_or_path=model_size,
