@@ -1,6 +1,12 @@
 # Tok-Transcript 🎙️⚡
 
+[![Sitio Web Oficial](https://img.shields.io/badge/Sitio_Web_Oficial-Tok--Transcript-6366f1?style=for-the-badge&logo=googlechrome&logoColor=white)](https://davidcaroo.github.io/Tok-Transcript/)
+[![Licencia](https://img.shields.io/badge/Licencia-MIT-22c55e?style=for-the-badge)](LICENSE)
+[![Windows](https://img.shields.io/badge/Plataforma-Windows_10_%2F_11-0284c7?style=for-the-badge&logo=windows&logoColor=white)](https://github.com/davidcaroo/Tok-Transcript/releases)
+
 **Tok-Transcript** es una aplicación de escritorio nativa para Windows construida con **Python 3.11+**, **PySide6**, **yt-dlp**, **FFmpeg** y **faster-whisper**.
+
+🌐 **Landing Page Oficial y Demo en vivo:** [https://davidcaroo.github.io/Tok-Transcript/](https://davidcaroo.github.io/Tok-Transcript/)
 
 Permite recibir una URL pública de un video de TikTok, extraer únicamente el flujo de audio necesario en segundo plano, normalizarlo, transcribirlo localmente mediante inteligencia artificial (sin enviar datos a servidores externos) y exportar el resultado con precisión milimétrica en formatos **TXT**, **SRT** y **WebVTT**.
 

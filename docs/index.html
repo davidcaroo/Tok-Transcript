@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- Primary Meta Tags -->
+  <title>Tok-Transcript | Transcribe Videos de TikTok a Texto con IA Local y Gratis</title>
+  <meta name="title" content="Tok-Transcript | Transcribe Videos de TikTok a Texto con IA Local y Gratis">
+  <meta name="description" content="Descarga Tok-Transcript: software de escritorio para Windows que extrae audio de TikTok y transcribe voz a texto con IA Whisper local. 100% privado, gratis y de código abierto.">
+  <meta name="keywords" content="transcribir tiktok, tiktok a texto, faster whisper windows, transcribir video gratis, ia local whisper, python pyside6, david caro, transcriptor de audio">
+  <meta name="author" content="David Caro">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://davidcaroo.github.io/Tok-Transcript/">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="assets/icons/app_icon.png">
+  <link rel="apple-touch-icon" href="assets/icons/app_icon.png">
+  <meta name="theme-color" content="#080c14" id="meta-theme-color">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://davidcaroo.github.io/Tok-Transcript/">
+  <meta property="og:title" content="Tok-Transcript | Transcribe Videos de TikTok a Texto con IA Local">
+  <meta property="og:description" content="Transcribe videos de TikTok a texto con Faster-Whisper. 100% privado, local en tu PC, sin límites ni suscripciones. Desarrollado por David Caro.">
+  <meta property="og:image" content="https://davidcaroo.github.io/Tok-Transcript/assets/screenshots/app_dark_mode.png">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:url" content="https://davidcaroo.github.io/Tok-Transcript/">
+  <meta name="twitter:title" content="Tok-Transcript | Transcribe Videos de TikTok a Texto con IA Local">
+  <meta name="twitter:description" content="Transcribe videos de TikTok a texto con Faster-Whisper. 100% privado, local en tu PC, sin límites ni suscripciones. Desarrollado por David Caro.">
+  <meta name="twitter:image" content="https://davidcaroo.github.io/Tok-Transcript/assets/screenshots/app_dark_mode.png">
+  <meta name="twitter:creator" content="@ing.davidcaro">
+
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="styles.css">
+
+  <!-- JSON-LD Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "SoftwareApplication",
+        "name": "Tok-Transcript",
+        "operatingSystem": "Windows 10, Windows 11",
+        "applicationCategory": "MultimediaApplication",
+        "softwareVersion": "1.0.0",
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "USD"
+        },
+        "description": "Aplicación de escritorio para Windows que extrae audio de TikTok y lo transcribe a texto con inteligencia artificial Faster-Whisper 100% local.",
+        "author": {
+          "@type": "Person",
+          "name": "David Caro",
+          "jobTitle": "Ingeniero Informático",
+          "url": "https://github.com/davidcaroo"
+        },
+        "downloadUrl": "https://github.com/davidcaroo/Tok-Transcript/releases/latest"
+      },
+      {
+        "@type": "Person",
+        "name": "David Caro",
+        "jobTitle": "Ingeniero Informático",
+        "url": "https://github.com/davidcaroo",
+        "sameAs": [
+          "https://github.com/davidcaroo",
+          "https://instagram.com/ing.davidcaro"
+        ]
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+
+  <!-- Ambient Light Effects -->
+  <div class="ambient-glow" aria-hidden="true"></div>
+
+  <!-- Navigation Bar -->
+  <header class="navbar">
+    <div class="container nav-wrapper">
+      <a href="#" class="brand-link" aria-label="Tok-Transcript Inicio">
+        <img src="assets/icons/app_icon.png" alt="Tok-Transcript Logo" class="brand-logo" width="36" height="36">
+        <span class="brand-name">Tok-Transcript</span>
+        <span class="version-badge">v1.0.0</span>
+      </a>
+
+      <nav aria-label="Navegación principal">
+        <ul class="nav-links">
+          <li><a href="#preview" class="nav-link">Vista Previa</a></li>
+          <li><a href="#features" class="nav-link">Características</a></li>
+          <li><a href="#simulator" class="nav-link">Simulador</a></li>
+          <li><a href="#how" class="nav-link">Cómo Funciona</a></li>
+          <li><a href="#creator" class="nav-link">Creador</a></li>
+          <li><a href="#downloads" class="nav-link">Descargas</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-actions">
+        <!-- Theme Toggle Button -->
+        <button id="themeToggleBtn" class="theme-toggle-btn" aria-label="Alternar tema claro y oscuro" title="Cambiar tema">
+          <!-- Sun Icon (shown in dark mode) -->
+          <svg id="sunIcon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="4"></circle>
+            <path d="M12 2v2"></path>
+            <path d="M12 20v2"></path>
+            <path d="m4.93 4.93 1.41 1.41"></path>
+            <path d="m17.66 17.66 1.41 1.41"></path>
+            <path d="M2 12h2"></path>
+            <path d="M20 12h2"></path>
+            <path d="m6.34 17.66-1.41 1.41"></path>
+            <path d="m19.07 4.93-1.41 1.41"></path>
+          </svg>
+          <!-- Moon Icon (shown in light mode) -->
+          <svg id="moonIcon" style="display:none;" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path>
+          </svg>
+        </button>
+
+        <!-- GitHub Repo CTA -->
+        <a href="https://github.com/davidcaroo/Tok-Transcript" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+          </svg>
+          <span>GitHub</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero Section -->
+    <section class="hero-section" id="hero">
+      <div class="container">
+        <div class="hero-pill">
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/>
+          </svg>
+          <span>Inferencia de IA 100% Local y Privada</span>
+        </div>
+
+        <h1 class="hero-title">
+          Convierte cualquier video de TikTok a <span class="text-gradient">texto preciso con IA</span>
+        </h1>
+
+        <p class="hero-desc">
+          La aplicación de escritorio para Windows que extrae audio y transcribe voz a texto con Faster-Whisper. Sin límites de duración, sin costos por API y sin enviar tus datos a la nube.
+        </p>
+
+        <div class="hero-cta-group">
+          <a href="#downloads" class="btn btn-primary btn-lg">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+              <polyline points="7 10 12 15 17 10"></polyline>
+              <line x1="12" y1="15" x2="12" y2="3"></line>
+            </svg>
+            <span>Descargar Tok-Transcript</span>
+          </a>
+
+          <a href="https://github.com/davidcaroo/Tok-Transcript" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-lg">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+            </svg>
+            <span>Dar Estrella en GitHub</span>
+          </a>
+        </div>
+
+        <div class="hero-trust-badges">
+          <div class="trust-item">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+            </svg>
+            <span>100% Local & Privado</span>
+          </div>
+          <div class="trust-item">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+            </svg>
+            <span>Faster-Whisper (CTranslate2)</span>
+          </div>
+          <div class="trust-item">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+              <line x1="8" y1="21" x2="16" y2="21"></line>
+              <line x1="12" y1="17" x2="12" y2="21"></line>
+            </svg>
+            <span>Windows 10 / 11 Nativo</span>
+          </div>
+          <div class="trust-item">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="20 6 9 17 4 12"></polyline>
+            </svg>
+            <span>Código Abierto (MIT)</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Product Showcase / Interactive Mockup -->
+    <section class="preview-section" id="preview">
+      <div class="container">
+        <div class="mockup-wrapper">
+          <div class="mockup-header">
+            <div class="window-dots">
+              <span class="dot dot-red"></span>
+              <span class="dot dot-yellow"></span>
+              <span class="dot dot-green"></span>
+            </div>
+
+            <!-- Interactive Screenshot Switcher Tabs -->
+            <div class="mockup-tabs" role="tablist" aria-label="Vistas de la interfaz">
+              <button class="mockup-tab-btn active" data-img="assets/screenshots/app_dark_mode.png" role="tab" aria-selected="true">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+                <span>Modo Oscuro</span>
+              </button>
+              <button class="mockup-tab-btn" data-img="assets/screenshots/app_light_mode.png" role="tab" aria-selected="false">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/></svg>
+                <span>Modo Claro</span>
+              </button>
+              <button class="mockup-tab-btn" data-img="assets/screenshots/app_transcription_result.png" role="tab" aria-selected="false">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>Transcripción Lista</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="mockup-body">
+            <img id="mainMockupImg" src="assets/screenshots/app_dark_mode.png" alt="Captura de pantalla de Tok-Transcript en Modo Oscuro" class="mockup-image" loading="lazy">
+          </div>
+        </div>
+
+        <!-- Live Interactive Simulation Widget -->
+        <div class="simulator-card" id="simulator">
+          <div class="simulator-header">
+            <h3 class="simulator-title">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-gradient">
+                <polygon points="5 3 19 12 5 21 5 3"></polygon>
+              </svg>
+              <span>Simulador Interactivo de Transcripción</span>
+            </h3>
+            <span class="version-badge">Demo en Vivo</span>
+          </div>
+
+          <p class="section-subtitle" style="font-size: 0.9375rem; margin-bottom: 1rem;">
+            Prueba cómo procesa Tok-Transcript los videos de TikTok sin salir de tu navegador:
+          </p>
+
+          <div class="simulator-input-group">
+            <input type="text" id="simUrlInput" class="sim-input" value="https://vm.tiktok.com/ZMh123456/" readonly aria-label="URL de TikTok simulada">
+            <button id="simRunBtn" class="btn btn-primary">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+              <span>Iniciar Transcripción</span>
+            </button>
+          </div>
+
+          <!-- Progress Bar -->
+          <div id="simProgressContainer" class="sim-progress-container">
+            <div class="sim-progress-bar-bg">
+              <div id="simProgressBar" class="sim-progress-bar-fill"></div>
+            </div>
+            <div class="sim-progress-label">
+              <span id="simStatusText">Conectando con TikTok...</span>
+              <span id="simPercentText">0%</span>
+            </div>
+          </div>
+
+          <!-- Output Box -->
+          <div class="sim-output-box" id="simOutputBox">
+            // Presiona "Iniciar Transcripción" para simular el proceso de extracción y transcripción de Whisper en tiempo real.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Bento Grid Features -->
+    <section class="features-section" id="features">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">Potencia & Privacidad</span>
+          <h2 class="section-title">Diseñado para la máxima velocidad y precisión</h2>
+          <p class="section-subtitle">
+            Combina los motores de vanguardia en extracción multimedia e inteligencia artificial acústica en una interfaz elegante y accesible.
+          </p>
+        </div>
+
+        <div class="bento-grid">
+          <!-- Bento 1: Faster-Whisper IA -->
+          <article class="bento-card bento-col-8">
+            <div class="bento-icon-wrapper">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="22"/></svg>
+            </div>
+            <h3 class="bento-title">Motor de IA Faster-Whisper (CTranslate2)</h3>
+            <p class="bento-desc">
+              Utiliza la implementación optimizada de OpenAI Whisper sobre CTranslate2 con cuantización INT8. Esto reduce el consumo de memoria a menos de la mitad y multiplica la velocidad hasta por 4x en procesadores estándar sin requerir tarjetas gráficas de gama alta.
+            </p>
+          </article>
+
+          <!-- Bento 2: 100% Local & Privado -->
+          <article class="bento-card bento-col-4">
+            <div class="bento-icon-wrapper">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+            </div>
+            <h3 class="bento-title">100% Privado</h3>
+            <p class="bento-desc">
+              Tus audios y transcripciones nunca viajan a servidores externos. Todo el cómputo se realiza exclusivamente en tu máquina.
+            </p>
+          </article>
+
+          <!-- Bento 3: Bypass & Extracción Limpia -->
+          <article class="bento-card bento-col-4">
+            <div class="bento-icon-wrapper">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            </div>
+            <h3 class="bento-title">Bypass Inteligente</h3>
+            <p class="bento-desc">
+              Integración nativa con <span class="font-mono">yt-dlp</span> y emulación TLS de Chrome (<span class="font-mono">curl_cffi</span>) para resolver enlaces cortos y proteger contra bloqueos.
+            </p>
+          </article>
+
+          <!-- Bento 4: Temas Claro / Oscuro / Sistema -->
+          <article class="bento-card bento-col-4">
+            <div class="bento-icon-wrapper">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="M2 12h2"/><path d="M20 12h2"/></svg>
+            </div>
+            <h3 class="bento-title">Modos Claro & Oscuro</h3>
+            <p class="bento-desc">
+              Interfaz moderna desarrollada en PySide6 / Qt con soporte dinámico para modo claro, modo oscuro y sincronización con el tema de Windows.
+            </p>
+          </article>
+
+          <!-- Bento 5: Formatos & Portabilidad -->
+          <article class="bento-card bento-col-4">
+            <div class="bento-icon-wrapper">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+            </div>
+            <h3 class="bento-title">Marcas de Tiempo</h3>
+            <p class="bento-desc">
+              Obtén texto corrido o segmentado con marcas de tiempo precisas <span class="font-mono">[00:00 - 00:05]</span> para edición rápida de videos y subtítulos.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Timeline How It Works -->
+    <section class="how-section" id="how">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">Flujo de Trabajo</span>
+          <h2 class="section-title">Tan simple como 4 pasos</h2>
+          <p class="section-subtitle">Sin configuraciones engorrosas de terminal ni instalaciones de dependencias complejas.</p>
+        </div>
+
+        <div class="steps-grid">
+          <div class="step-card">
+            <div class="step-number">01</div>
+            <h3 class="step-title">Pega el Enlace</h3>
+            <p class="step-desc">Copia cualquier enlace de TikTok desde la app móvil o el navegador e insértalo en la caja de texto.</p>
+          </div>
+          <div class="step-card">
+            <div class="step-number">02</div>
+            <h3 class="step-title">Descarga el Audio</h3>
+            <p class="step-desc">El motor extrae automáticamente la pista de audio en formato de alta fidelidad sin comprimir la voz.</p>
+          </div>
+          <div class="step-card">
+            <div class="step-number">03</div>
+            <h3 class="step-title">Inferencia de IA</h3>
+            <p class="step-desc">Faster-Whisper analiza fonéticamente el audio, detecta el idioma y genera la transcripción con puntuación natural.</p>
+          </div>
+          <div class="step-card">
+            <div class="step-number">04</div>
+            <h3 class="step-title">Copia y Exporta</h3>
+            <p class="step-desc">Copia el resultado al portapapeles con un clic o expórtalo como archivo de texto listo para tus proyectos.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Creator Spotlight Section (David Caro) -->
+    <section class="creator-section" id="creator">
+      <div class="container">
+        <div class="creator-card">
+          <div class="creator-content">
+            <div class="creator-avatar-wrap">
+              <div class="creator-avatar" aria-label="David Caro">DC</div>
+            </div>
+
+            <div class="creator-details">
+              <span class="creator-tag">Desarrollador & Creador</span>
+              <h2 class="creator-name">David Caro</h2>
+              <div class="creator-handle">@ing.davidcaro &bull; davidcaroo</div>
+              <p class="creator-bio">
+                <strong>Ingeniero Informático</strong> &bull; Construyendo aplicaciones web modernas, accesibles y escalables 🚀. Enfocado en software de alto rendimiento, interfaces de usuario de precisión y herramientas de productividad con inteligencia artificial práctica.
+              </p>
+
+              <div class="creator-links">
+                <a href="https://github.com/davidcaroo" target="_blank" rel="noopener noreferrer" class="btn btn-secondary" title="GitHub de David Caro">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                  </svg>
+                  <span>@davidcaroo</span>
+                </a>
+
+                <a href="https://github.com/davidcaroo/Tok-Transcript" target="_blank" rel="noopener noreferrer" class="btn btn-primary" title="Repositorio del Proyecto">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                  <span>Explorar Repositorio</span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Download Section -->
+    <section class="download-section" id="downloads">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">Descarga Oficial</span>
+          <h2 class="section-title">Elige la versión perfecta para tu flujo de trabajo</h2>
+          <p class="section-subtitle">
+            Disponible para Windows 10 y Windows 11 (64-bit). Sin costo, libre de publicidad y 100% de código abierto.
+          </p>
+        </div>
+
+        <div class="download-grid">
+          <!-- Card 1: Setup Installer -->
+          <div class="download-card highlight">
+            <span class="download-badge-popular">Recomendado</span>
+            <div>
+              <div class="dl-card-header">
+                <span class="dl-type">Instalador Estándar</span>
+                <h3 class="dl-title">TokTranscript-Setup.exe</h3>
+                <div class="dl-meta">Versión 1.0.0 &bull; 64-bit &bull; ~290 MB</div>
+              </div>
+
+              <ul class="dl-features">
+                <li>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+                  <span>Asistente de instalación guiado en español</span>
+                </li>
+                <li>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+                  <span>Acceso directo en el Escritorio y Menú Inicio</span>
+                </li>
+                <li>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+                  <span>Desinstalador limpio integrado en Windows</span>
+                </li>
+                <li>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+                  <span>Incluye binarios integrados de FFmpeg y Faster-Whisper</span>
+                </li>
+              </ul>
+            </div>
+
+            <a href="https://github.com/davidcaroo/Tok-Transcript/releases/latest" class="btn btn-primary btn-lg" style="margin-top: 1.5rem;">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              <span>Descargar Instalador (.exe)</span>
+            </a>
+          </div>
+
+          <!-- Card 2: Portable -->
+          <div class="download-card">
+            <div>
+              <div class="dl-card-header">
+                <span class="dl-type">Sin Instalación</span>
+                <h3 class="dl-title">TokTranscript-Portable.zip</h3>
+                <div class="dl-meta">Versión 1.0.0 &bull; 64-bit &bull; ~330 MB</div>
+              </div>
+
+              <ul class="dl-features">
+                <li>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+                  <span>No requiere permisos de administrador</span>
+                </li>
+                <li>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+                  <span>Ideal para llevar en memorias USB</span>
+                </li>
+                <li>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+                  <span>Descomprimir y ejecutar directamente</span>
+                </li>
+                <li>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+                  <span>Configuración y caché portables</span>
+                </li>
+              </ul>
+            </div>
+
+            <a href="https://github.com/davidcaroo/Tok-Transcript/releases/latest" class="btn btn-secondary btn-lg" style="margin-top: 1.5rem;">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              <span>Descargar Portable (.zip)</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Requirements Box -->
+        <div class="requirements-box">
+          <div>
+            <strong>Requisitos del Sistema:</strong> Windows 10 u 11 (64 bits) &bull; Mínimo 4 GB de memoria RAM &bull; Conexión a internet solo para descargar videos de TikTok.
+          </div>
+          <div>
+            Licencia: <strong>MIT (Software Libre)</strong>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="#" class="brand-link">
+            <img src="assets/icons/app_icon.png" alt="Tok-Transcript Logo" width="30" height="30" style="border-radius: 6px;">
+            <span class="brand-name" style="font-size: 1.125rem;">Tok-Transcript</span>
+          </a>
+          <p>
+            Herramienta de escritorio moderna y privada para transcribir contenido de TikTok con inteligencia artificial de audio local.
+          </p>
+        </div>
+
+        <div>
+          <h4 class="footer-col-title">Navegación</h4>
+          <ul class="footer-col-links">
+            <li><a href="#hero">Inicio</a></li>
+            <li><a href="#preview">Vista Previa</a></li>
+            <li><a href="#features">Características</a></li>
+            <li><a href="#simulator">Simulador</a></li>
+            <li><a href="#downloads">Descargas</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-col-title">Comunidad & Código</h4>
+          <ul class="footer-col-links">
+            <li><a href="https://github.com/davidcaroo/Tok-Transcript" target="_blank" rel="noopener noreferrer">Repositorio en GitHub</a></li>
+            <li><a href="https://github.com/davidcaroo/Tok-Transcript/releases" target="_blank" rel="noopener noreferrer">Lanzamientos & Versiones</a></li>
+            <li><a href="https://github.com/davidcaroo/Tok-Transcript/issues" target="_blank" rel="noopener noreferrer">Reportar Problemas</a></li>
+            <li><a href="https://github.com/davidcaroo/Tok-Transcript/blob/main/README.md" target="_blank" rel="noopener noreferrer">Documentación</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>
+          &copy; 2026 Tok-Transcript &bull; Desarrollado por <strong>David Caro</strong> (@ing.davidcaro).
+        </div>
+        <div>
+          Distribuido bajo la Licencia de Código Abierto MIT.
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Script -->
+  <script src="app.js"></script>
+</body>
+</html>

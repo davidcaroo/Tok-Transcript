@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://davidcaroo.github.io/Tok-Transcript/sitemap.xml
